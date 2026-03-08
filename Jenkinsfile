@@ -24,7 +24,7 @@ pipeline {
         stage("buildimage") {
             steps {
                 script{
-                    buildimage()
+                    buildimage 'piratehammad/demo-app:jma-3.0'
                 }
             }
         }
