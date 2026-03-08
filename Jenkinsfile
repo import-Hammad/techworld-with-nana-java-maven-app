@@ -1,4 +1,4 @@
-def  gv
+def gv
 pipeline {
     agent any
     tools {
@@ -12,14 +12,14 @@ pipeline {
                 }
             }
         }
-        stage("build jar") {
+        stage("buildjar") {
             steps {
                 script{
                     gv.buildJar()
                 }
             }
         }
-        stage("build image") {
+        stage("buildimage") {
             steps {
                 script{
                     gv.buildImage()
