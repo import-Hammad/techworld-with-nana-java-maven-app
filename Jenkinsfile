@@ -14,24 +14,24 @@ pipeline {
                 }
             }
         }
-        stage("build jar") {
+        stage("buildjar") {
             steps {
                 script{
-                    buildJar()
+                    buildjar()
                 }
             }
         }
-        stage("build image") {
+        stage("buildimage") {
             steps {
                 script{
                     buildimage()
                 }
             }
         }
-        stage("deployApp") {
+        stage("deployapp") {
             steps {
                 script{
-                    gv.deployApp()
+                    gv.deployapp()
                 }
             }
         }
