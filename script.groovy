@@ -1,4 +1,4 @@
-def buildJar() {
+def buildjar() {
     echo 'building the application...'
         sh 'mvn package'
 }
@@ -11,7 +11,7 @@ def buildimage() {
                         sh 'docker push piratehammad/demo-app:jma-2.0'
                     }
 }
-def deployApp() {
+def deployapp() {
     echo 'deploying the application...'
 }
 
