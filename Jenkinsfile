@@ -25,6 +25,9 @@ pipeline {
             steps {
                 script{
                     buildimage 'piratehammad/demo-app:jma-3.0'
+                    dockerLogin()
+                    dockerPush('piratehammad/demo-app:jma-3.0')
+
                 }
             }
         }
