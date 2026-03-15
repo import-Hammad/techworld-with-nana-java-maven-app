@@ -21,7 +21,7 @@ pipeline {
                 }
             }
         }
-        stage("buildimage") {
+        stage("build and push image") {
             steps {
                 script{
                     buildimage 'piratehammad/demo-app:jma-3.0'
