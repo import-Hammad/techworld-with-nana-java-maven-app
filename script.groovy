@@ -1,5 +1,5 @@
 
-def deployApp() {
+def deployapp() {
     echo 'deploying the application...'
 }
 
