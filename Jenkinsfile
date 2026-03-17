@@ -39,6 +39,7 @@ pipeline {
             steps {
                 script {
                     gv.deployapp()
+                    echo "Application deployed successfully!"
                 }
             }
         }
