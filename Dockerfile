@@ -1,4 +1,4 @@
-FROM amazoncorretto:17-alpine-jre
+FROM amazoncorretto:17-alpine
 
 
 EXPOSE 8080
