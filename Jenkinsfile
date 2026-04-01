@@ -11,7 +11,7 @@ pipeline {
         maven 'maven-3.92'
     }
     environment {
-        IMAGE_NAME = "piratehammad/react-nodejs-app:${BUILD_NUMBER}"
+        IMAGE_NAME = "piratehammad/react-nodejs-app:2.0"
     }
     stages {
         stage('build app') {
