@@ -1,7 +1,6 @@
-version: "3.8"
 services:
   java-maven-app:
-    image: piratehammad/react-nodejs-app:1.0
+    image: ${IMAGE}
     ports:
       - "8080:8080"
   postgres:

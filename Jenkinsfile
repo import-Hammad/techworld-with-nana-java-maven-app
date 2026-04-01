@@ -11,7 +11,7 @@ pipeline {
         maven 'maven-3.92'
     }
     environment {
-        IMAGE_NAME = 'piratehammad/react-nodejs-app:1.0'
+        IMAGE_NAME = 'piratehammad/react-nodejs-app:2.0'
     }
     stages {
         stage('build app') {
@@ -34,11 +34,15 @@ pipeline {
     steps {
         script {
             echo 'deploying docker image to EC2...'
-            def shellCmd = "bash ./server-cmds.sh"
+
+
+            def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
+
+
             sshagent(['ec2-server-key']) {
-                sh "scp -o StrictHostKeyChecking=no server-cmds.sh ubuntu@100.27.226.149:/home/ubuntu/"
-                sh "scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@100.27.226.149:/home/ubuntu/"
-                sh "ssh -o StrictHostKeyChecking=no ubuntu@100.27.226.149 ${shellCmd}"
+                sh "scp -o StrictHostKeyChecking=no server-cmds.sh ubuntu@54.88.124.65:/home/ubuntu/"
+                sh "scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@54.88.124.65:/home/ubuntu/"
+                sh "ssh -o StrictHostKeyChecking=no ubuntu@54.88.124.65 ${shellCmd}"
             }
         }
     }
