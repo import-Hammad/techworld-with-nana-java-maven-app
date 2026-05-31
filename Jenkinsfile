@@ -35,11 +35,11 @@ pipeline {
             steps {
                 script {
                     echo 'deploying the app'
-                    def shellCmd = "bash ./server.sh ${IMAGE_NAME}"
+                    def shellCmd = "bash ./server-cmds.sh ${IMAGE_NAME}"
                     sshagent(['ec2-slave-key']) {
-                        sh "scp -o StrictHostKeyChecking=no server.sh ubuntu@54.91.135.131:/home/ubuntu/"
-                        sh "scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@54.91.135.131:/home/ubuntu/"
-                        sh "ssh -o StrictHostKeyChecking=no ubuntu@54.91.135.131 ${shellCmd}"
+                        sh "scp -o StrictHostKeyChecking=no server-cmds.sh ubuntu@100.53.212.231:/home/ubuntu/"
+                        sh "scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@100.53.212.231:/home/ubuntu/"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@100.53.212.231 ${shellCmd}"
                     }
                 }
             }
