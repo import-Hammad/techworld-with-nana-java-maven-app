@@ -6,47 +6,43 @@ library identifier: 'jenkins-shared-libraries-nana@master', retriever: modernSCM
         credentialsId: 'github-credentials'
     ]
 )
-
 pipeline {
     agent any
     tools {
         maven "maven-3.92"
     }
     environment {
-        IMAGE_NAME = "docker pull piratehammad/react-nodejs-app:1.0"
+        IMAGE_NAME = "piratehammad/react-nodejs-app:1.0"
     }
-
+    stages {
         stage('build app') {
             steps {
                 script {
-                    buildjar()        // ← from shared library
+                    buildJar()
                 }
             }
         }
-
         stage('build and push image') {
             steps {
                 script {
-                    
-                    buildimage(env.IMAGE_NAME)    
+                    buildImage(env.IMAGE_NAME)
                     dockerLogin()
                     dockerPush(env.IMAGE_NAME)
                 }
             }
         }
-
         stage('deploy the app') {
             steps {
                 script {
                     echo 'deploying the app'
-                    def shellCmd = "bash ./server.sh"
-                    
-                    sshagent (['ec2-server-key']){
-                        sh "scp server.sh ubuntu@<IP_ADDRESS>:/home/ubuntu/"
-                        sh "scp docker-compose.yml ubuntu@<IP_ADDRESS>:/home/ubuntu/"
-                        sh 'ssh -o StrictHostKeyChecking=no ubuntu@100.53.212.231  ${shellCmd} '
+                    def shellCmd = "bash ./server.sh ${IMAGE_NAME}"
+                    sshagent(['ec2-slave-key']) {
+                        sh "scp -o StrictHostKeyChecking=no server.sh ubuntu@54.91.135.131:/home/ubuntu/"
+                        sh "scp -o StrictHostKeyChecking=no docker-compose.yml ubuntu@54.91.135.131:/home/ubuntu/"
+                        sh "ssh -o StrictHostKeyChecking=no ubuntu@54.91.135.131 ${shellCmd}"
                     }
                 }
             }
         }
     }
+}
