@@ -18,16 +18,16 @@ pipeline {
         stage('build app') {
             steps {
                 script {
-                    buildJar()
+                    buildjar()                              // ✅ matches buildjar.groovy
                 }
             }
         }
         stage('build and push image') {
             steps {
                 script {
-                    buildImage(env.IMAGE_NAME)
-                    dockerLogin()
-                    dockerPush(env.IMAGE_NAME)
+                    buildimage(env.IMAGE_NAME)              // ✅ matches buildimage.groovy
+                    dockerLogin()                           // ✅ matches dockerLogin.groovy
+                    dockerPush(env.IMAGE_NAME)              // ✅ matches dockerPush.groovy
                 }
             }
         }
